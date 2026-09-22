@@ -1,0 +1,97 @@
+name: Build Surf FED
+
+on:
+  push:
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  electron:
+    name: Electron ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: windows
+            os: windows-latest
+            args: --win portable nsis
+          - name: macos
+            os: macos-latest
+            args: --mac dmg
+          - name: linux
+            os: ubuntu-latest
+            args: --linux AppImage deb
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: electron
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: electron/package-lock.json
+      - run: npm ci
+      - run: npm run dist -- ${{ matrix.args }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: surf-fed-electron-${{ matrix.name }}
+          path: electron/dist/**
+          if-no-files-found: error
+
+  smoke-test:
+    name: Electron 27-assertion smoke test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: electron
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: electron/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  tauri-web:
+    name: Tauri frontend build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tauri
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tauri/package-lock.json
+      - run: npm install
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: surf-fed-tauri-frontend
+          path: tauri/dist/**
+          if-no-files-found: error
+
+  release:
+    name: Attach artifacts to GitHub release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [electron, smoke-test, tauri-web]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: release-artifacts/**/*
+          fail_on_unmatched_files: true
+          generate_release_notes: true
