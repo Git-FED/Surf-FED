@@ -1,5 +1,7 @@
 # Surf FED
 
+<img width="2560" height="1440" alt="surf_fed_clay_new_11_spaceport" src="https://github.com/user-attachments/assets/047e04c1-3942-4f48-9a43-884d3a3d6728" />
+
 Surf FED is a focused browser workspace for people who want a real **three-way tab split** instead of a single active page. The desktop prototype keeps live Chromium webviews in a parking layer, maps them to persistent pane slots, and lets the focused pane drive navigation controls.
 
 ## What is implemented in this repository
