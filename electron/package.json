@@ -1,0 +1,25 @@
+{
+  "name": "surf-fed-electron",
+  "version": "0.1.0",
+  "description": "Surf FED desktop browser workspace",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "electron tests/run-test.js",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^36.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.surffed.browser",
+    "productName": "Surf FED",
+    "files": ["**/*"],
+    "directories": {"output": "dist"},
+    "win": {"target": ["portable", "nsis"]},
+    "mac": {"target": ["dmg"], "category": "public.app-category.productivity"},
+    "linux": {"target": ["AppImage", "deb"], "category": "Network"}
+  }
+}

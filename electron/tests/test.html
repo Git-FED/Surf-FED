@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head><meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self'; style-src 'self' 'unsafe-inline'"></head>
+  <body>
+    <header id="toolbar">
+      <button id="backBtn"></button><button id="forwardBtn"></button><button id="reloadBtn"></button>
+      <input id="urlBar" /><button id="goBtn"></button><button id="newTabBtn"></button>
+      <button id="muteBtn"></button><button id="extensionsBtn"></button>
+      <div class="layout-controls"><button class="layout-button" data-layout="1"></button><button class="layout-button" data-layout="2"></button><button class="layout-button" data-layout="3"></button></div>
+    </header>
+    <nav id="tabStrip"></nav>
+    <main id="paneArea">
+      <div id="webviewParking"></div>
+      <section class="pane" id="pane-0"><button class="pane-header" data-pane="0"></button></section>
+      <section class="pane" id="pane-1"><button class="pane-header" data-pane="1"></button></section>
+      <section class="pane" id="pane-2"><button class="pane-header" data-pane="2"></button></section>
+      <div class="divider" id="divider-0" data-divider="0"></div><div class="divider" id="divider-1" data-divider="1"></div>
+    </main>
+    <aside id="extensionsPanel" hidden><button id="extensionsCloseBtn"></button><button id="extensionAddBtn"></button><button id="extensionReloadBtn"></button><button id="extensionFolderBtn"></button><p id="extensionStatus"></p><ul id="extensionList"></ul></aside>
+    <script src="../audio-controller.js"></script>
+    <script src="../renderer.js"></script>
+    <script src="splitview-test.js"></script>
+  
+<section class="support-links" aria-label="Support Surf FED">
+  <h2>Support Surf FED</h2>
+  <p>
+    <a href="https://ko-fi.com/fedpromptly" target="_blank" rel="noopener">
+      <img height="36" style="border:0;height:36px" src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support Surf FED on Ko-fi" />
+    </a>
+  </p>
+  <p>
+    <a href="https://www.buymeacoffee.com/fedpromptly" target="_blank" rel="noopener">
+      <img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20book&emoji=%F0%9F%93%96&slug=fedpromptly&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a book" />
+    </a>
+  </p>
+</section>
+
+<footer class="footer">
+  <a href="mailto:careers@fedpromptly.com">careers@fedpromptly.com</a> ·
+  <a href="mailto:support@fedpromptly.com">support@fedpromptly.com</a> ·
+  <a href="mailto:business@fedpromptly.com">business@fedpromptly.com</a> ·
+  <a href="mailto:contact@fedpromptly.com">contact@fedpromptly.com</a>
+</footer>
+</body>
+</html>

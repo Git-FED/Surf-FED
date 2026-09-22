@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Surf FED</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="toolbar" aria-label="Browser toolbar">
+      <button id="backBtn" title="Back">←</button>
+      <button id="forwardBtn" title="Forward">→</button>
+      <button id="reloadBtn" title="Reload">↻</button>
+      <input id="urlBar" aria-label="Address" placeholder="Enter a URL or search term" />
+      <button id="goBtn" title="Go">Go</button>
+      <button id="newTabBtn" title="New tab">＋</button>
+      <button id="muteBtn" title="Toggle audio">🔇</button>
+      <button id="extensionsBtn" title="Extensions">🧩</button>
+      <div class="layout-controls" aria-label="Pane layout">
+        <button data-layout="1" class="layout-button active">1</button>
+        <button data-layout="2" class="layout-button">2</button>
+        <button data-layout="3" class="layout-button">3</button>
+      </div>
+    </header>
+    <nav id="tabStrip" class="tab-strip" aria-label="Open tabs"></nav>
+    <main id="paneArea" class="pane-area">
+      <div id="webviewParking" class="webview-parking" aria-hidden="true"></div>
+      <section class="pane" id="pane-0"><button class="pane-header" data-pane="0">Empty</button></section>
+      <section class="pane" id="pane-1"><button class="pane-header" data-pane="1">Empty</button></section>
+      <section class="pane" id="pane-2"><button class="pane-header" data-pane="2">Empty</button></section>
+      <div class="divider" id="divider-0" data-divider="0"></div>
+      <div class="divider" id="divider-1" data-divider="1"></div>
+    </main>
+    <aside id="extensionsPanel" class="extensions-panel" hidden>
+      <div class="panel-heading"><h2>Extensions</h2><button id="extensionsCloseBtn">×</button></div>
+      <div class="panel-actions">
+        <button id="extensionAddBtn">Load unpacked…</button>
+        <button id="extensionReloadBtn">Reload built-ins</button>
+        <button id="extensionFolderBtn">Open extension folder</button>
+      </div>
+      <p id="extensionStatus" class="status" role="status"></p>
+      <ul id="extensionList" class="extension-list"></ul>
+    </aside>
+    
+    <script src="audio-controller.js"></script>
+    <script src="renderer.js"></script>
+  
+<section class="support-links" aria-label="Support Surf FED">
+  <h2>Support Surf FED</h2>
+  <p>
+    <a href="https://ko-fi.com/fedpromptly" target="_blank" rel="noopener">
+      <img height="36" style="border:0;height:36px" src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support Surf FED on Ko-fi" />
+    </a>
+  </p>
+  <p>
+    <a href="https://www.buymeacoffee.com/fedpromptly" target="_blank" rel="noopener">
+      <img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20book&emoji=%F0%9F%93%96&slug=fedpromptly&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a book" />
+    </a>
+  </p>
+</section>
+
+<footer class="footer">
+  <a href="mailto:careers@fedpromptly.com">careers@fedpromptly.com</a> ·
+  <a href="mailto:support@fedpromptly.com">support@fedpromptly.com</a> ·
+  <a href="mailto:business@fedpromptly.com">business@fedpromptly.com</a> ·
+  <a href="mailto:contact@fedpromptly.com">contact@fedpromptly.com</a>
+</footer>
+</body>
+</html>
