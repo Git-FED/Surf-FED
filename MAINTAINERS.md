@@ -1,0 +1,3 @@
+# Maintainers
+
+See CONTRIBUTING.md.
