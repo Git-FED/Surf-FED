@@ -30,6 +30,9 @@ button:hover { background: #334155; }
 .panel-heading h2 { margin: 0; font-size: 1.1rem; }
 .panel-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.8rem 0; }
 .extension-list { margin: 0; padding-left: 1.2rem; line-height: 1.8; }
+.extension-item { display: flex; align-items: center; gap: 0.4rem; justify-content: space-between; }
+.extension-item span { min-width: 0; overflow-wrap: anywhere; }
+.extension-item button { padding: 0.2rem 0.45rem; font-size: 0.75rem; }
 .status { min-height: 1.3em; color: #cbd5e1; }
 .footer { flex: 0 0 auto; padding: 0.3rem; text-align: center; font-size: 0.7rem; color: #94a3b8; background: #111827; }
 .footer a { color: #93c5fd; }

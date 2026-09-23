@@ -7,17 +7,19 @@
   "scripts": {
     "start": "electron .",
     "test": "electron tests/run-test.js",
+    "test:extensions": "node tests/validate-extensions.js",
     "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^39.8.10",
+    "electron": "^36.0.0",
     "electron-builder": "^26.0.0"
   },
   "build": {
     "appId": "com.surffed.browser",
     "productName": "Surf FED",
     "files": ["**/*"],
-    "directories": {"output": "dist"},
+    "asarUnpack": ["extensions/builtin/**/*", "assets/icons/**/*"],
+    "directories": {"output": "dist", "buildResources": "build"},
     "win": {"target": ["portable", "nsis"]},
     "mac": {"target": ["dmg"], "category": "public.app-category.productivity"},
     "linux": {"target": ["AppImage", "deb"], "category": "Network"}

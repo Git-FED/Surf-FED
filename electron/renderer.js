@@ -57,10 +57,16 @@ function normalizeSavedState(saved) {
   state.layout = Math.max(1, Math.min(3, Number(saved.layout) || 1));
   state.focusedPane = Math.max(0, Math.min(state.layout - 1, Number(saved.focusedPane) || 0));
   state.panes = Array.isArray(saved.panes) && saved.panes.length === 3
-    ? saved.panes
+    ? saved.panes.map((id) => Number.isInteger(id) && id > 0 ? id : null)
     : [null, null, null];
-  state.dividers = Array.isArray(saved.dividers) ? saved.dividers : [50, 50];
-  state.nextTabId = Number(saved.nextTabId) || 1;
+  const firstDivider = Number(saved.dividers?.[0]);
+  const secondDivider = Number(saved.dividers?.[1]);
+  state.dividers = [
+    Number.isFinite(firstDivider) ? Math.max(20, Math.min(80, firstDivider)) : 50,
+    Number.isFinite(secondDivider) ? Math.max(30, Math.min(95, secondDivider)) : 50,
+  ];
+  if (state.dividers[1] <= state.dividers[0] + 10) state.dividers[1] = Math.min(95, state.dividers[0] + 10);
+  state.nextTabId = Math.max(1, Number(saved.nextTabId) || 1);
 }
 
 function createWebview(tabId, url) {
@@ -100,7 +106,8 @@ function createWebview(tabId, url) {
 }
 
 function createTab(url = DEFAULT_URL, { assign = true, id = null, title = null } = {}) {
-  const tabId = id || state.nextTabId++;
+  const tabId = Number.isInteger(id) && id > 0 ? id : state.nextTabId;
+  state.nextTabId = Math.max(state.nextTabId, tabId + 1);
   const tab = { id: tabId, url, title: title || url, error: null, muted: audioController.shouldMute(url), webview: null };
   tab.webview = createWebview(tabId, url);
   state.tabs.set(tabId, tab);
@@ -192,6 +199,12 @@ function applyLayout() {
   paneElements.forEach((pane, paneIndex) => {
     pane.classList.toggle('visible', paneIndex < state.layout);
     pane.classList.toggle('focused', paneIndex === state.focusedPane);
+    const widths = state.layout === 1
+      ? ['100%']
+      : state.layout === 2
+        ? [`${state.dividers[0]}%`, `calc(100% - ${state.dividers[0]}%)`]
+        : [`${state.dividers[0]}%`, `calc(${state.dividers[1]}% - ${state.dividers[0]}%)`, `calc(100% - ${state.dividers[1]}%)`];
+    pane.style.flex = paneIndex < state.layout ? `0 0 ${widths[paneIndex]}` : '0 0 0';
     const tab = state.tabs.get(state.panes[paneIndex]);
     const header = pane.querySelector('.pane-header');
     header.textContent = tab ? tab.title : 'Empty';
@@ -207,6 +220,13 @@ function applyLayout() {
     webview.style.visibility = paneIndex < state.layout ? 'visible' : 'hidden';
     webview.style.pointerEvents = paneIndex < state.layout ? 'auto' : 'none';
   });
+
+  for (const tab of state.tabs.values()) {
+    if (!state.panes.includes(tab.id)) {
+      tab.webview.style.visibility = 'hidden';
+      tab.webview.style.pointerEvents = 'none';
+    }
+  }
 
   $('divider-0').classList.toggle('visible', state.layout >= 2);
   $('divider-1').classList.toggle('visible', state.layout >= 3);
@@ -285,7 +305,30 @@ async function refreshExtensionPanel() {
   target.replaceChildren();
   for (const extension of list) {
     const item = document.createElement('li');
-    item.textContent = `${extension.name} · ${extension.version}${extension.builtin ? ' · built-in' : ''}`;
+    item.className = 'extension-item';
+    const details = document.createElement('span');
+    details.textContent = `${extension.name} · ${extension.version}${extension.builtin ? ' · built-in' : ''}${extension.enabled ? '' : ' · disabled'}${extension.description ? ` — ${extension.description}` : ''}${extension.loadError ? ` · ${extension.loadError}` : ''}`;
+    item.appendChild(details);
+    const toggle = document.createElement('button');
+    toggle.textContent = extension.enabled ? 'Disable' : 'Enable';
+    toggle.addEventListener('click', async () => {
+      const result = extension.enabled
+        ? await window.electronAPI.extensions.disable(extension.id)
+        : await window.electronAPI.extensions.enable(extension.id);
+      $('extensionStatus').textContent = result.ok ? `${extension.name} ${extension.enabled ? 'disabled' : 'enabled'}.` : result.error;
+      await refreshExtensionPanel();
+    });
+    item.appendChild(toggle);
+    if (!extension.builtin) {
+      const remove = document.createElement('button');
+      remove.textContent = 'Remove';
+      remove.addEventListener('click', async () => {
+        const result = await window.electronAPI.extensions.remove(extension.id);
+        $('extensionStatus').textContent = result.ok ? `${extension.name} removed.` : result.error;
+        await refreshExtensionPanel();
+      });
+      item.appendChild(remove);
+    }
     target.appendChild(item);
   }
   $('extensionStatus').textContent = `${list.length} extension(s) loaded`;

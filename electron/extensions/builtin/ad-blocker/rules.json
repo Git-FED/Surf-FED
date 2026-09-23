@@ -1,1 +1,6 @@
-[{"id":1,"priority":1,"action":{"type":"block"},"condition":{"urlFilter":"ads","resourceTypes":["script","image","media"]}}]
+[
+  {"id": 1, "priority": 1, "action": {"type": "block"}, "condition": {"urlFilter": "||doubleclick.net^", "resourceTypes": ["script", "image", "media", "xmlhttprequest", "sub_frame"]}},
+  {"id": 2, "priority": 1, "action": {"type": "block"}, "condition": {"urlFilter": "||googlesyndication.com^", "resourceTypes": ["script", "image", "media", "xmlhttprequest", "sub_frame"]}},
+  {"id": 3, "priority": 1, "action": {"type": "block"}, "condition": {"urlFilter": "||adservice.google.com^", "resourceTypes": ["script", "xmlhttprequest", "sub_frame"]}},
+  {"id": 4, "priority": 1, "action": {"type": "block"}, "condition": {"urlFilter": "ads", "resourceTypes": ["script", "image", "media", "xmlhttprequest", "sub_frame"]}}
+]

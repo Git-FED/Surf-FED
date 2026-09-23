@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Surf FED</title>
+  <link rel="stylesheet" href="styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <div id="toolbar">
+    <button id="backBtn">◀</button>
+    <button id="forwardBtn">▶</button>
+    <button id="reloadBtn">⟳</button>
+    <input id="urlBar" type="text" placeholder="Enter URL or search...">
+    <button id="newTabBtn">+</button>
+    <button id="darkModeBtn" title="Toggle dark mode">🌙</button>
+    <button id="extensionsBtn" title="Extensions">🧩</button>
+  </div>
+  <div id="tabsContainer"></div>
+  <div id="webviewContainer"></div>
+
+  <!-- Extensions Manager Panel -->
+  <div id="extensionsPanel" class="hidden">
+    <div class="ext-panel-header">
+      <h2>Extensions</h2>
+      <button id="extCloseBtn" class="ext-close" title="Close">✕</button>
+    </div>
+    <div class="ext-panel-actions">
+      <button id="extAddBtn">＋ Load unpacked extension…</button>
+      <button id="extOpenFolderBtn">📂 Open extensions folder</button>
+      <button id="extReloadBtn">⟳ Reload list</button>
+    </div>
+    <div id="extList"></div>
+    <p class="ext-hint">
+      Tip: drop an unpacked extension folder into your extensions folder, then click
+      “Reload list”. Or use “Load unpacked extension…” to pick it with a dialog.
+      Changes apply to new page loads.
+    </p>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

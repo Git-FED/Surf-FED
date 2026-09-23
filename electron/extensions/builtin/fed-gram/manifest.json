@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Surf FED Fed-Gram",
-  "version": "1.0.0",
-  "description": "A small extension surface for Surf FED experiments.",
-  "permissions": ["storage", "activeTab"],
+  "version": "1.1.0",
+  "description": "Recognizes public Instagram post URLs and prepares them for a user-selected workflow.",
+  "permissions": ["activeTab", "tabs", "storage"],
+  "host_permissions": ["https://www.instagram.com/*", "https://instagram.com/*"],
   "icons": {"128": "icon.png"},
   "background": {"service_worker": "background.js"},
-  "action": {"default_popup": "popup.html"}
+  "action": {"default_title": "Fed-Gram", "default_popup": "popup.html"}
 }
