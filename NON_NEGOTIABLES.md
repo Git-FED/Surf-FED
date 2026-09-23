@@ -16,6 +16,6 @@ The release workflow must produce Windows portable + NSIS, macOS Electron DMGs, 
 
 Both renderers must support 1-, 2-, and 3-pane layouts; draggable dividers; focused-pane toolbar actions; user-controlled pane/tab assignment; parked tabs; exact 3→1→3 restoration; and localStorage persistence. Webviews/iframes must remain alive during layout changes. The Electron smoke suite is the acceptance bar.
 
-## Global default mute
+## Automatic global default mute
 
-New tabs are muted by default unless their origin is whitelisted. The setting and whitelist persist locally, and users can toggle the policy from the toolbar/settings panel.
+New tabs are muted automatically unless their origin is whitelisted. The policy is re-applied when a tab starts loading or navigates, so page navigation cannot bypass the default. The setting and whitelist persist locally, and users can toggle the policy from the toolbar/settings panel.

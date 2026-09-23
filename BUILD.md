@@ -2,7 +2,7 @@
 
 ## Electron desktop
 
-From `electron/`, install dependencies with `npm ci`. Run `npm start` for the local browser, `npm test` for the split-view smoke test, and `npm run dist` to invoke electron-builder.
+From `electron/`, install dependencies with `npm ci`. Run `npm start` for the local browser, `npm test` for the split-view smoke test, and `npm run dist` to invoke electron-builder. The Linux CI smoke-test job restores the Electron `chrome-sandbox` helper ownership and `4755` permissions after `npm ci`, so the real Chromium sandbox remains enabled.
 
 The Electron configuration targets Windows portable and NSIS installers, macOS DMG, and Linux AppImage plus Debian package. macOS signing and notarization require repository secrets and are intentionally not claimed by the local scaffold.
 

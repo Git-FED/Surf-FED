@@ -1,7 +1,5 @@
 # Surf FED
 
-<img width="2560" height="1440" alt="browser-theme-discovery" src="https://github.com/user-attachments/assets/99d52ecb-c8f8-42ec-a416-537f1ea8b896" />
-
 Surf FED is a focused browser workspace for people who want a real **three-way tab split** instead of a single active page. The desktop application keeps live Chromium webviews alive in a parking layer, maps them to persistent pane slots, and lets the focused pane drive navigation controls.
 
 ## What is included
@@ -9,7 +7,7 @@ Surf FED is a focused browser workspace for people who want a real **three-way t
 - Electron desktop shell with 1-, 2-, and 3-pane layouts, draggable dividers, parked tabs, exact 3→1→3 restoration, and persistent local state.
 - Four built-in Manifest V3 extensions: **ad-blocker**, **dark-reader**, **fed-gram**, and **page-info**.
 - Extension manager with built-in and unpacked extension discovery, enable/disable state, removal of user extensions, reload, and packaged-build path handling.
-- Global mute-by-default controller with per-origin whitelist storage.
+- Automatic mute-by-default controller with per-origin whitelist storage; the policy is re-applied when tabs start loading or navigate.
 - Tauri mobile renderer with the same three-pane model, draggable dividers, persistent tab IDs, and a WebKit-compatible audio-policy boundary.
 - GitHub Actions build matrix for Electron desktop artifacts and the Tauri frontend.
 - GitHub Pages landing page, support page, campaign artwork, browser themes, icon sets, and the historical extension/source material supplied with earlier project revisions.
