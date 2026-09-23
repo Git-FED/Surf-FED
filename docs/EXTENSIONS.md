@@ -24,6 +24,10 @@ The extension manager supports the following operations:
 
 Packaged Electron builds unpack extension files because Chromium's `session.loadExtension()` requires a real filesystem directory. Startup fails visibly when a built-in extension cannot be loaded. The application does not use `allowUncheckedErrors` to hide extension failures.
 
+## Automatic audio muting
+
+Electron tabs are muted automatically when their origin is not in the local audio whitelist. Surf FED re-applies this rule when a tab starts loading, performs a normal navigation, or changes URL in-page. A whitelisted origin remains audible across its pages. The setting and whitelist are stored in the persistent browser profile.
+
 ## Tauri mobile
 
 iOS and Android use WebKit. WebKit has no Chrome extension runtime, so the mobile renderer and Rust layer implement equivalent built-in capabilities as first-class features. Arbitrary Chrome extensions are not supported on mobile and are not represented as enabled extensions.
