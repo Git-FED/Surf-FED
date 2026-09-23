@@ -1,18 +1,16 @@
 # Surf FED
 
-<img width="2560" height="1440" alt="surf_fed_clay_new_11_spaceport" src="https://github.com/user-attachments/assets/047e04c1-3942-4f48-9a43-884d3a3d6728" />
+Surf FED is a focused browser workspace for people who want a real **three-way tab split** instead of a single active page. The desktop application keeps live Chromium webviews alive in a parking layer, maps them to persistent pane slots, and lets the focused pane drive navigation controls.
 
-Surf FED is a focused browser workspace for people who want a real **three-way tab split** instead of a single active page. The desktop prototype keeps live Chromium webviews in a parking layer, maps them to persistent pane slots, and lets the focused pane drive navigation controls.
+## What is included
 
-## What is implemented in this repository
-
-- Electron desktop shell with 1-, 2-, and 3-pane layouts.
-- Parked tabs and exact pane assignment restoration across 3→1→3 layout changes.
-- Draggable divider controls and focused-pane navigation.
-- Four desktop MV3 built-ins: ad-blocker, dark-reader, fed-gram, and page-info.
+- Electron desktop shell with 1-, 2-, and 3-pane layouts, draggable dividers, parked tabs, exact 3→1→3 restoration, and persistent local state.
+- Four built-in Manifest V3 extensions: **ad-blocker**, **dark-reader**, **fed-gram**, and **page-info**.
+- Extension manager with built-in and unpacked extension discovery, enable/disable state, removal of user extensions, reload, and packaged-build path handling.
 - Global mute-by-default controller with per-origin whitelist storage.
-- Tauri mobile scaffold with an explicit WebKit/native-feature boundary.
-- GitHub Actions build matrix and a 27-assertion Electron smoke suite.
+- Tauri mobile renderer with the same three-pane model, draggable dividers, persistent tab IDs, and a WebKit-compatible audio-policy boundary.
+- GitHub Actions build matrix for Electron desktop artifacts and the Tauri frontend.
+- GitHub Pages landing page, support page, campaign artwork, browser themes, icon sets, and the historical extension/source material supplied with earlier project revisions.
 
 ## Run the desktop prototype
 
@@ -23,24 +21,45 @@ npm test
 npm start
 ```
 
-The test must report `TESTS:PASS 27/27`. If it does not, the three-pane requirement is not met.
+The smoke test must report `TESTS:PASS 27/27`.
+
+## Run the Tauri frontend
+
+```bash
+cd tauri
+npm ci
+npm run build
+```
+
+Native iOS and Android packages require the platform toolchains and signing configuration described in `docs/BUILD.md` and `docs/SURF_FED_TAURI_FEASIBILITY_STUDY.md`.
+
+## Extension management
+
+The four built-ins live in `electron/extensions/builtin/` and run in the persistent `persist:surf-fed` Chromium session. Open **Extensions** in the desktop toolbar to reload built-ins, load an unpacked third-party extension, enable or disable an extension, remove a user extension, or open the user extension folder. Built-in extension load failures remain fatal at startup; unchecked extension errors are not suppressed.
+
+Tauri uses WebKit and therefore does not claim arbitrary Chrome extension compatibility. Its equivalent capabilities are implemented as renderer/native features instead.
 
 ## Repository map
 
-- `electron/`: desktop application, extensions, audio controller, and tests.
+- `electron/`: desktop application, extension runtime, audio controller, icons, and tests.
 - `tauri/`: mobile renderer and Rust/Tauri configuration.
-- `docs/`: build, deployment, extension, and migration notes.
-- `.github/`: issue templates, contribution template, and CI workflow.
+- `docs/`: build, deployment, extension, migration, and feasibility notes.
+- `docs/legacy/`: source notes and snapshots from supplied earlier project variants.
+- `electron/assets/`: merged application icon set and UI icons.
+- `assets/themes/`: browser theme artwork from the supplied project revisions.
+- `tools/legacy/`: preserved archive-generation and support-verification utilities.
+- `.github/`: issue templates, contribution guidance, funding, and CI workflow.
 - `NON_NEGOTIABLES.md`: acceptance criteria that take priority over convenience.
+
+## Verification
+
+```bash
+cd electron && npm test
+cd ../tauri && npm run build
+```
 
 ## Support
 
-<a href="https://ko-fi.com/W3T61ZU5FS" target="_blank"><img height="36" style="border:0px;height:36px;" src="https://ko-fi.com/img/githubbutton_sm.svg" border="0" alt="Buy Me a Coffee at ko-fi.com" /></a>
-
-Contact: careers@fedpromptly.com · support@fedpromptly.com · business@fedpromptly.com · contact@fedpromptly.com
-
-## Funding and support
-
 Surf FED is supported through [GitHub Sponsors](https://github.com/sponsors/FED-OS), [Ko-fi](https://ko-fi.com/fedpromptly), [Patreon](https://patreon.com/fedpromptly), and [Buy Me a Coffee](https://www.buymeacoffee.com/fedpromptly).
 
-Visit [fedpromptly.com](https://fedpromptly.com) or join the [Discord community](https://discord.gg) to follow the project.
+Contact: careers@fedpromptly.com · support@fedpromptly.com · business@fedpromptly.com · contact@fedpromptly.com
