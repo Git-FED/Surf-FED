@@ -2,6 +2,9 @@
   "name": "surf-fed-electron",
   "version": "0.1.0",
   "description": "Surf FED desktop browser workspace",
+  "homepage": "https://www.fedpromptly.org",
+  "author": {"name": "Surf FED contributors", "email": "support@fedpromptly.com"},
+  "desktopName": "surf-fed",
   "private": true,
   "main": "main.js",
   "scripts": {
@@ -11,7 +14,7 @@
     "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^39.8.10",
+    "electron": "^36.0.0",
     "electron-builder": "^26.0.0"
   },
   "build": {
@@ -22,6 +25,6 @@
     "directories": {"output": "dist", "buildResources": "build"},
     "win": {"target": ["portable", "nsis"]},
     "mac": {"target": ["dmg"], "category": "public.app-category.productivity"},
-    "linux": {"target": ["AppImage", "deb"], "category": "Network"}
+    "linux": {"target": ["AppImage", "deb"], "category": "Network", "maintainer": "support@fedpromptly.com"}
   }
 }

@@ -29,6 +29,12 @@ function focusedTab() {
   return state.tabs.get(state.panes[state.focusedPane]) || null;
 }
 
+function enforceAutomaticMute(tab) {
+  if (!tab || !tab.webview) return;
+  tab.muted = audioController.shouldMute(tab.url);
+  audioController.applyTo(tab.webview, tab.url);
+}
+
 function saveState() {
   const snapshot = {
     layout: state.layout,
@@ -80,11 +86,23 @@ function createWebview(tabId, url) {
     const paneIndex = state.panes.indexOf(tabId);
     if (paneIndex >= 0) focusPane(paneIndex);
   });
+  webview.addEventListener('did-start-loading', () => {
+    const tab = state.tabs.get(tabId);
+    if (tab) enforceAutomaticMute(tab);
+  });
   webview.addEventListener('did-navigate', () => {
     const tab = state.tabs.get(tabId);
     if (!tab) return;
     tab.url = webview.getURL() || tab.url;
-    audioController.applyTo(webview, tab.url);
+    enforceAutomaticMute(tab);
+    render();
+    saveState();
+  });
+  webview.addEventListener('did-navigate-in-page', () => {
+    const tab = state.tabs.get(tabId);
+    if (!tab) return;
+    tab.url = webview.getURL() || tab.url;
+    enforceAutomaticMute(tab);
     render();
     saveState();
   });
@@ -116,7 +134,7 @@ function createTab(url = DEFAULT_URL, { assign = true, id = null, title = null }
   if (assign) {
     assignTabToPane(tabId, state.focusedPane);
   }
-  audioController.applyTo(tab.webview, url);
+  enforceAutomaticMute(tab);
   render();
   saveState();
   return tab;
