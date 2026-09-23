@@ -1,5 +1,7 @@
 # Surf FED
 
+<img width="2560" height="1440" alt="browser-theme-discovery" src="https://github.com/user-attachments/assets/99d52ecb-c8f8-42ec-a416-537f1ea8b896" />
+
 Surf FED is a focused browser workspace for people who want a real **three-way tab split** instead of a single active page. The desktop application keeps live Chromium webviews alive in a parking layer, maps them to persistent pane slots, and lets the focused pane drive navigation controls.
 
 ## What is included
