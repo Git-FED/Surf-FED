@@ -63,3 +63,16 @@ cd ../tauri && npm run build
 Surf FED is supported through [GitHub Sponsors](https://github.com/sponsors/FED-OS), [Ko-fi](https://ko-fi.com/fedpromptly), [Patreon](https://patreon.com/fedpromptly), and [Buy Me a Coffee](https://www.buymeacoffee.com/fedpromptly).
 
 Contact: careers@fedpromptly.com · support@fedpromptly.com · business@fedpromptly.com · contact@fedpromptly.com
+
+## FED-EDU web and mobile layer
+
+The requested FED-EDU app structure has been added without replacing the Surf FED browser. `apps/web/` is a React + Vite PWA shell with learning, community, dictionary, blueprint, profile, and messaging routes. `apps/mobile/` contains the Capacitor configuration for packaging the shared web build. Shared package placeholders, Supabase migrations, product/security/mobile documentation, and four mute-all-tabs promotional images are included.
+
+```bash
+cd apps/web
+npm install
+npm run dev
+npm run build
+```
+
+The FED-EDU messaging screen is deliberately a scaffold until authentication, server-side authorization, key management, abuse prevention, reporting, account recovery, and rate limiting are configured.
