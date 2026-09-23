@@ -1,0 +1,1 @@
+import terms from '../data/dictionary.json'; export default function DictionaryPage(){return <><div className="eyebrow">WIKI / DICTIONARY</div><h1>Make the language yours.</h1><input className="search" placeholder="Search a term…"/>{terms.map(t=><article className="card" key={t.term}><h3>{t.term}</h3><p className="muted">{t.definition}</p></article>)}</>}

@@ -1,0 +1,4 @@
+import { Routes, Route, Navigate } from 'react-router-dom';
+import AppShell from './components/layout/AppShell';
+import HomePage from './routes/HomePage'; import CoursesPage from './routes/CoursesPage'; import CommunityPage from './routes/CommunityPage'; import DictionaryPage from './routes/DictionaryPage'; import BlueprintPage from './routes/BlueprintPage'; import ProfilePage from './routes/ProfilePage'; import MessagingPage from './routes/MessagingPage';
+export default function App(){return <AppShell><Routes><Route path="/" element={<HomePage/>}/><Route path="/courses" element={<CoursesPage/>}/><Route path="/community" element={<CommunityPage/>}/><Route path="/dictionary" element={<DictionaryPage/>}/><Route path="/blueprints" element={<BlueprintPage/>}/><Route path="/profile" element={<ProfilePage/>}/><Route path="/messages" element={<MessagingPage/>}/><Route path="*" element={<Navigate to="/" replace/>}/></Routes></AppShell>}

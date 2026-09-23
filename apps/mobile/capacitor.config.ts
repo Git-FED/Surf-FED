@@ -1,0 +1,1 @@
+import type { CapacitorConfig } from "@capacitor/cli"; const config: CapacitorConfig = { appId: "org.fedpromptly.fededu", appName: "FED-EDU", webDir: "../web/dist", bundledWebRuntime: false }; export default config;

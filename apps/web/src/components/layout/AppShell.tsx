@@ -1,0 +1,4 @@
+import type { ReactNode } from 'react';
+import { NavLink } from 'react-router-dom';
+const links=[['/','Home'],['/courses','Courses'],['/community','Community'],['/dictionary','Wiki'],['/blueprints','Blueprints'],['/profile','Profile']];
+export default function AppShell({children}:{children:ReactNode}){return <div className="app"><header className="topbar"><NavLink to="/" className="brand">FED<span>·</span>EDU</NavLink><nav className="topnav">{links.slice(1).map(([to,label])=><NavLink key={to} to={to} className={({isActive})=>isActive?'active':''}>{label}</NavLink>)}</nav><NavLink to="/messages" className="button">Messages</NavLink></header><main className="content">{children}</main><nav className="bottomnav">{links.slice(0,5).map(([to,label])=><NavLink key={to} to={to} className={({isActive})=>isActive?'active':''}>{label}</NavLink>)}</nav></div>}

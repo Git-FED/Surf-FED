@@ -1,0 +1,1 @@
+export default function MessagingPage(){return <><div className="eyebrow">DIRECT MESSAGES</div><h1>Reach out with care.</h1><div className="card"><p className="muted">Messaging is scaffolded for the future authenticated backend. The current app does not claim production-ready private messaging.</p><span className="mono">AUTH + SERVER AUTHORIZATION REQUIRED</span></div></>}
