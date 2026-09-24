@@ -1,80 +1,25 @@
-# Surf FED
+# Surf FED Promotional Site
 
-<img width="2560" height="1440" alt="surf-fed-11-before-after" src="https://github.com/user-attachments/assets/31c9ca90-6faf-4527-86b8-fa8f5ea74fef" />
+A static, GitHub Pages-ready promotional site for Surf FED and FED-EDU.
 
-Surf FED is a focused browser workspace for people who want a real **three-way tab split** instead of a single active page. The desktop application keeps live Chromium webviews alive in a parking layer, maps them to persistent pane slots, and lets the focused pane drive navigation controls.
+## Local preview
 
-## What is included
-
-- Electron desktop shell with 1-, 2-, and 3-pane layouts, draggable dividers, parked tabs, exact 3→1→3 restoration, and persistent local state.
-- Four built-in Manifest V3 extensions: **ad-blocker**, **dark-reader**, **fed-gram**, and **page-info**.
-- Extension manager with built-in and unpacked extension discovery, enable/disable state, removal of user extensions, reload, and packaged-build path handling.
-- Automatic mute-by-default controller with per-origin whitelist storage; the policy is re-applied when tabs start loading or navigate.
-- Tauri mobile renderer with the same three-pane model, draggable dividers, persistent tab IDs, and a WebKit-compatible audio-policy boundary.
-- GitHub Actions build matrix for Electron desktop artifacts and the Tauri frontend.
-- GitHub Pages landing page, support page, campaign artwork, browser themes, icon sets, and the historical extension/source material supplied with earlier project revisions.
-
-## Run the desktop prototype
+Because the site is plain HTML, CSS, and JavaScript, it can be previewed with any static server:
 
 ```bash
-cd electron
-npm ci
-npm test
-npm start
+python3 -m http.server 8080
 ```
 
-The smoke test must report `TESTS:PASS 27/27`.
+Then open `http://localhost:8080`.
 
-## Run the Tauri frontend
+## Publishing
 
-```bash
-cd tauri
-npm ci
-npm run build
-```
+The included `.github/workflows/deploy-pages.yml` deploys the repository to GitHub Pages whenever `main` changes. In repository settings, set Pages to **GitHub Actions**.
 
-Native iOS and Android packages require the platform toolchains and signing configuration described in `docs/BUILD.md` and `docs/SURF_FED_TAURI_FEASIBILITY_STUDY.md`.
+## Design system
 
-## Extension management
+The site carries over the source project’s dark editorial language: Space Grotesk, DM Mono, amber `#f0b35b`, violet `#8e83ff`, deep navy backgrounds, subtle noise, and asymmetrical product storytelling.
 
-The four built-ins live in `electron/extensions/builtin/` and run in the persistent `persist:surf-fed` Chromium session. Open **Extensions** in the desktop toolbar to reload built-ins, load an unpacked third-party extension, enable or disable an extension, remove a user extension, or open the user extension folder. Built-in extension load failures remain fatal at startup; unchecked extension errors are not suppressed.
+## Asset note
 
-Tauri uses WebKit and therefore does not claim arbitrary Chrome extension compatibility. Its equivalent capabilities are implemented as renderer/native features instead.
-
-## Repository map
-
-- `electron/`: desktop application, extension runtime, audio controller, icons, and tests.
-- `tauri/`: mobile renderer and Rust/Tauri configuration.
-- `docs/`: build, deployment, extension, migration, and feasibility notes.
-- `docs/legacy/`: source notes and snapshots from supplied earlier project variants.
-- `electron/assets/`: merged application icon set and UI icons.
-- `assets/themes/`: browser theme artwork from the supplied project revisions.
-- `tools/legacy/`: preserved archive-generation and support-verification utilities.
-- `.github/`: issue templates, contribution guidance, funding, and CI workflow.
-- `NON_NEGOTIABLES.md`: acceptance criteria that take priority over convenience.
-
-## Verification
-
-```bash
-cd electron && npm test
-cd ../tauri && npm run build
-```
-
-## Support
-
-Surf FED is supported through [GitHub Sponsors](https://github.com/sponsors/FED-OS), [Ko-fi](https://ko-fi.com/fedpromptly), [Patreon](https://patreon.com/fedpromptly), and [Buy Me a Coffee](https://www.buymeacoffee.com/fedpromptly).
-
-Contact: careers@fedpromptly.com · support@fedpromptly.com · business@fedpromptly.com · contact@fedpromptly.com
-
-## FED-EDU web and mobile layer
-
-The requested FED-EDU app structure has been added without replacing the Surf FED browser. `apps/web/` is a React + Vite PWA shell with learning, community, dictionary, blueprint, profile, and messaging routes. `apps/mobile/` contains the Capacitor configuration for packaging the shared web build. Shared package placeholders, Supabase migrations, product/security/mobile documentation, and four mute-all-tabs promotional images are included.
-
-```bash
-cd apps/web
-npm install
-npm run dev
-npm run build
-```
-
-The FED-EDU messaging screen is deliberately a scaffold until authentication, server-side authorization, key management, abuse prevention, reporting, account recovery, and rate limiting are configured.
+The promotional images in `assets/` are adapted from the supplied Surf FED project archive and retained as local files for GitHub Pages reliability.

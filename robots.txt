@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fed-os.github.io/surf-fed-promo-site/sitemap.xml
