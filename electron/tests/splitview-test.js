@@ -17,7 +17,7 @@
   split.state.layout = 1;
   split.state.focusedPane = 0;
   split.state.nextTabId = 1;
-  localStorage.removeItem('surf-fed-splitview-v2');
+  localStorage.removeItem('surf-fed-splitview-v3');
 
   // Layout: 6 assertions.
   split.setLayout(1); assert('initial layout is one pane', split.state.layout === 1);
@@ -76,7 +76,7 @@
   const assignment = [...split.state.panes];
   const identities = assignment.map((id) => split.state.tabs.get(id)?.webview);
   split.saveState();
-  assert('saveState writes localStorage', Boolean(localStorage.getItem('surf-fed-splitview-v2')));
+  assert('saveState writes localStorage', Boolean(localStorage.getItem('surf-fed-splitview-v3')));
   split.setLayout(1);
   split.setLayout(3);
   assert('3→1→3 restores pane assignment', JSON.stringify(split.state.panes) === JSON.stringify(assignment));

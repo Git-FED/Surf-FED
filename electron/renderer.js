@@ -1,5 +1,5 @@
-const STORAGE_KEY = 'surf-fed-splitview-v2';
-const DEFAULT_URL = 'https://example.com';
+const STORAGE_KEY = 'surf-fed-splitview-v3';
+const DEFAULT_URL = 'https://www.google.com';
 
 const state = {
   layout: 1,

@@ -1,7 +1,7 @@
 import { readAudioSettings, writeAudioSettings } from './audio-controller.js';
 
 const STORAGE_KEY = 'surf-fed-tauri-splitview-v1';
-const DEFAULT_URL = 'https://example.com';
+const DEFAULT_URL = 'https://www.google.com';
 const state = { layout: 1, focusedPane: 0, nextId: 1, panes: [null, null, null], dividers: [50, 50], tabs: new Map() };
 const area = document.querySelector('#paneArea');
 const urlBar = document.querySelector('#urlBar');
