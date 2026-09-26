@@ -2,8 +2,6 @@
 
 <img width="2560" height="1440" alt="32-browser-tab-volume-meter" src="https://github.com/user-attachments/assets/b945c8ef-1d6d-4e93-866f-d2b16e4bfec0" />
 
-A static, GitHub Pages-ready promotional site for Surf FED and FED-EDU.
-
 ## Local preview
 
 Because the site is plain HTML, CSS, and JavaScript, it can be previewed with any static server:
